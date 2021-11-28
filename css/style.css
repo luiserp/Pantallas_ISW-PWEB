@@ -33,7 +33,6 @@ body{
 
 .card{
     display: inline-block;
-    /* height: 14rem; */
     height: auto;
 
     background-color: rgba(255, 255, 255, 0.8);
@@ -42,6 +41,10 @@ body{
 .card .card-header{
     background-color: rgba(255, 166, 0, 0.7) !important;
 }
+
+/* .estudiante, .profesor, .administrador {
+    display: none;
+} */
 
 footer{
     background-color: rgba(0, 0, 0, 0.534);
@@ -57,23 +60,14 @@ footer .copyrigth{
 }
 
 @media(max-width: 1200px){
-    .card{
-        height: auto;
-        /* height: 16.5rem; */
-    }
+    
 }
 
 @media(max-width: 992px){
-    .card{
-        height: auto;
-        /* height: 20rem; */
-    }
+
 }
 
 @media(max-width: 768px){
-    .card{
-        height: auto;
-        margin-top: 8px;
-    }
+
 }
 
