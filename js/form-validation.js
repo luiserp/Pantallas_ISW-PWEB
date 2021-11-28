@@ -11,82 +11,37 @@
         form.addEventListener('submit', function (event) {
           if (!form.checkValidity()) {
             event.preventDefault()
-            event.stopPropagation()
           }
-
+  
           form.classList.add('was-validated')
         }, false)
       })
-})()
+  })()
 
-
-var html_estudiante = [`<label for="anno" class="col-sm-4 col-form-label">Año que cursa:</label>
-                        <div class="col-sm-8">
-                            <select id="anno" class="form-select" required>
-                                <option disabled selected value="">Seleccionar...</option>
-                                <option value="1">1ro</option>
-                                <option value="2">2do</option>
-                                <option value="3">3ro</option>
-                                <option value="3">4to</option>
-                                <option value="3">5to</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Debe indicar el año del estudiante.
-                            </div>
-                        </div>`];
-                        
-var html_profesor = [`<label for="asignatura" class="col-sm-4 col-form-label">Asignaura:</label>
-                              <div class="col-sm-8">
-                                  <select id="asignatura" class="form-select" required>
-                                      <option disabled selected value="">Seleccionar...</option>
-                                      <option value="1">Asignatura 1</option>
-                                      <option value="2">Asignatura 2</option>
-                                      <option value="3">Asignatura 3</option>
-                                      <option value="3">Asignatura 4</option>
-                                      <option value="3">Asignatura 5</option>
-                                  </select>
-                                  <div class="invalid-feedback">
-                                      Seleccione la asignatura que imparte el profesor.
-                                  </div>
-                              </div>`,
-                              `<label for="categoria" class="col-sm-4 col-form-label">Categoria docente:</label>
-                              <div class="col-sm-8">
-                                <input type="text" class="form-control" id="categoria" placeholder="Ingeniero, Master o Doctor" required>
-                                <div class="invalid-feedback">
-                                    Debe escribir la categoria docente del profesor.
-                                </div>
-                              </div>`];
-
-var html_administrador = [`<label for="telefono" class="col-sm-4 col-form-label">Telefono de emergencias:</label>
-                                  <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="telefono" placeholder="+53 xxxxxxxx" required>
-                                    <div class="invalid-feedback">
-                                        Debe escribir un telefono de emergencias.
-                                    </div>
-                                  </div>`,
-                                `<label for="centro" class="col-sm-4 col-form-label">Centro:</label>
-                                <div class="col-sm-8">
-                                  <input type="text" class="form-control" id="centro" placeholder="Centro donde radica" required>
-                                  <div class="invalid-feedback">
-                                      Debe escribir el centro donde radica el administrador.
-                                  </div>
-                                </div>`];
+var cont_principal = document.querySelector('form div');
+var contenedores_estudiante = document.querySelectorAll('.estudiante');
+var contenedores_profesor = document.querySelectorAll('.profesor');
+var contenedores_administrador = document.querySelectorAll('.administrador');
 
 document.getElementById('rol').addEventListener('change', function(e){
   let val = e.target.value;
+
   if(val == "1"){
-    contenedores_estudiante.forEach( i => i.style.display = "flex" )
-    contenedores_profesor.forEach( i => i.style.display = "none" )
-    contenedores_administrador.forEach( i => i.style.display = "none" )
-  }else if(val == "2"){
-    contenedores_estudiante.forEach( i => i.style.display = "none" )
-    contenedores_profesor.forEach( i => i.style.display = "flex" )
-    contenedores_administrador.forEach( i => i.style.display = "none" )
-  }else {
-    contenedores_estudiante.forEach( i => i.style.display = "none" )
-    contenedores_profesor.forEach( i => i.style.display = "none" )
-    contenedores_administrador.forEach( i => i.style.display = "flex" )
+    contenedores_estudiante.forEach( i =>  { cont_principal.appendChild(i); i.style.display="flex"; } );
+    contenedores_profesor.forEach( i =>  {try{cont_principal.removeChild(i)} catch{}} )
+    contenedores_administrador.forEach( i => {try{cont_principal.removeChild(i)} catch{}} )
   }
+  if(val == "2"){
+    contenedores_profesor.forEach( i => { cont_principal.appendChild(i); i.style.display="flex"; } );
+    contenedores_estudiante.forEach( i => {try{cont_principal.removeChild(i)} catch{}} )
+    contenedores_administrador.forEach( i => {try{cont_principal.removeChild(i)} catch{}} )
+  }
+  if(val == "3"){
+    contenedores_administrador.forEach( i => { cont_principal.appendChild(i); i.style.display="flex"; } )
+    contenedores_profesor.forEach( i => {try{cont_principal.removeChild(i)} catch{}} )
+    contenedores_estudiante.forEach( i => {try{cont_principal.removeChild(i)} catch{}} )
+  }
+
 });
 
 // var contenedores_estudiante = document.querySelectorAll('.estudiante');
@@ -109,3 +64,18 @@ document.getElementById('rol').addEventListener('change', function(e){
 //     contenedores_administrador.forEach( i => i.style.display = "flex" )
 //   }
 // });
+
+
+// VALIDACION PERSONALIZADA
+document.querySelector('form').addEventListener('submit', function(e){
+  let pass = document.querySelector('#contrasenna');
+  let re_pass = document.querySelector('#rep_contrasenna');
+
+  if(pass.value != re_pass.value){
+    pass.setCustomValidity("Las contraseñas no coinciden.")
+    pass.parentElement.querySelector('.invalid-feedback').innerHTML = pass.validationMessage
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+});

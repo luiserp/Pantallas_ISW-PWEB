@@ -119,7 +119,7 @@
                     <div class="row mb-3 col-md-6">
                         <label for="solapin" class="col-sm-4 col-form-label">Solapin:</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="solapin" placeholder="Numero de solapin" required>
+                          <input type="text" class="form-control" id="solapin" pattern="[ET]\d{6}" required placeholder="Numero de solapin">
                           <div class="invalid-feedback">
                               Solapin no valido, profesores empiezan con "T" y estudiantes con "E".
                           </div>
@@ -211,15 +211,14 @@
                           </div>
                         </div>
                     </div>
+                   
+                </div>
 
-                    <div class="col-sm-12 text-center mt-5">
-                        <button type="submit" class="btn btn-primary mx-3 my-2">Enviar</button>
-                        <button type="button" class="btn btn-danger  mx-3 my-2">Cancelar</button>
-                        <button type="button" class="btn btn-warning mx-3 my-2">Resetear</button>
-                    </div>
-
-
-            </div>
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary mx-3 my-2">Enviar</button>
+                    <button type="button" class="btn btn-danger  mx-3 my-2">Cancelar</button>
+                    <button type="button" class="btn btn-warning mx-3 my-2">Resetear</button>
+                </div>
         </form>
     </section>
 
@@ -231,8 +230,7 @@
     
     
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/action.js"></script>    
+    <script src="js/bootstrap.min.js"></script> 
     <script src="js/form-validation.js"></script>
 </body>
 </html>
